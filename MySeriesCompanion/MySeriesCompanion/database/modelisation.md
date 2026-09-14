@@ -24,6 +24,9 @@ Une personne peut regarder plusieurs épisodes.
 
 ## Tables
 
+PK= clé primaire
+FK= clé étrangère
+
 SERIE (
     id PK,
     nom,
