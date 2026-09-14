@@ -5,7 +5,7 @@ require_once "../includes/functions.php";
 
 $titrePage = "Mes séries";
 
-// Récupération des séries depuis la base de données
+// Récupération des séries
 $requete = $pdo->query("SELECT * FROM serie ORDER BY date_sortie DESC");
 $series = $requete->fetchAll(PDO::FETCH_ASSOC);
 
@@ -17,14 +17,15 @@ require "../includes/header.php";
     <p>Cette application te permet de gérer tes séries, leurs saisons et leurs épisodes.</p>
 </section>
 
-<!-- Bouton pour ajouter une nouvelle série -->
+<!-- Bouton pour ADD-->
+ 
 <div class="home-action">
     <a class="btn" href="ajouter-serie.php">+ Ajouter une série</a>
 </div>
 
 <?php if (count($series) > 0): ?>
 
-    <!-- Affichage de toutes les séries -->
+    <!-- Affichage des séries-->
     <div class="series-grid">
 
         <?php foreach ($series as $serie): ?>
@@ -33,16 +34,16 @@ require "../includes/header.php";
 
                 <?php if (!empty($serie["vignette"])): ?>
 
-                    <!-- Affichage de la vignette avec son URL -->
+                    <!-- Affichage de la vignette -->
                     <img
-                        class="vignette-carte"
+                        class="card-image"
                         src="<?= e($serie["vignette"]) ?>"
                         alt="Vignette de <?= e($serie["nom"]) ?>"
                     >
 
                 <?php endif; ?>
 
-                <div class="contenant-carte">
+                <div class="card-content">
 
                     <h2><?= e($serie["nom"]) ?></h2>
 
@@ -67,8 +68,8 @@ require "../includes/header.php";
 
 <?php else: ?>
 
-    <!-- Message affiché lorsqu'aucune série n'existe -->
-    <div class="vide">
+    <!-- Message affiché -->
+    <div class="empty">
         <p>Aucune série n'a encore été ajoutée.</p>
     </div>
 

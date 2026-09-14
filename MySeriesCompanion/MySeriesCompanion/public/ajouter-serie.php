@@ -23,12 +23,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $erreurs[] = "La date de sortie est obligatoire et doit être valide.";
     }
 
-    // Vignette
-
     $vignette = trim($_POST["vignette"] ?? ""); 
 
-
-    // Si aucune erreur, on enregistre la série dans la base de données
+    // On enregistre la série
     if (empty($erreurs)) {
         $sql = "INSERT INTO serie (nom, resume, vignette, date_sortie)
                 VALUES (:nom, :resume, :vignette, :date_sortie)";
@@ -67,9 +64,9 @@ require "../includes/header.php";
     </div>
 <?php endif; ?>
 
-<!-- Formulaire d'ajout d'une série -->
+<!-- Formulaire d'ajout -->
 
-<form class="form-card" method="POST" enctype="multipart/form-data">
+<form class="form-card" method="POST">
 
     <div class="form-group">
         <label for="nom">Nom <span class="required"></span></label>
