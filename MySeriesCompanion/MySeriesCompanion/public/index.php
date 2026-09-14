@@ -1,49 +1,39 @@
 <?php
-// Connexion à la base de données et inclusion des fonctions
 require_once "../config/database.php";
 require_once "../includes/functions.php";
 
 $titrePage = "Mes séries";
 
-// Récupération des séries
 $requete = $pdo->query("SELECT * FROM serie ORDER BY date_sortie DESC");
 $series = $requete->fetchAll(PDO::FETCH_ASSOC);
 
 require "../includes/header.php";
 ?>
 
-<section class="page-title">
+<section class="titre-page">
     <h1>Mes séries</h1>
     <p>Cette application te permet de gérer tes séries, leurs saisons et leurs épisodes.</p>
 </section>
 
-<!-- Bouton pour ADD-->
- 
-<div class="home-action">
-    <a class="btn" href="ajouter-serie.php">+ Ajouter une série</a>
+<div class="action-accueil">
+    <a class="bouton" href="ajouter-serie.php">+ Ajouter une série</a>
 </div>
 
 <?php if (count($series) > 0): ?>
 
-    <!-- Affichage des séries-->
-    <div class="series-grid">
+    <div class="grille-series">
 
         <?php foreach ($series as $serie): ?>
 
-            <article class="card">
+            <article class="carte">
 
                 <?php if (!empty($serie["vignette"])): ?>
-
-                    <!-- Affichage de la vignette -->
-                    <img
-                        class="card-image"
-                        src="<?= e($serie["vignette"]) ?>"
-                        alt="Vignette de <?= e($serie["nom"]) ?>"
-                    >
-
+                    <img class="image-carte"
+                         src="<?= e($serie["vignette"]) ?>"
+                         alt="<?= e($serie["nom"]) ?>">
                 <?php endif; ?>
 
-                <div class="card-content">
+                <div class="contenu-carte">
 
                     <h2><?= e($serie["nom"]) ?></h2>
 
@@ -52,14 +42,18 @@ require "../includes/header.php";
                     </p>
 
                     <?php if (!empty($serie["resume"])): ?>
-                        <p class="resume"><?= nl2br(e($serie["resume"])) ?></p>
+                        <p class="resume">
+                            <?= nl2br(e($serie["resume"])) ?>
+                        </p>
                     <?php endif; ?>
 
-                    <a class="btn btn-secondary" href="serie.php?id=<?= $serie["id"] ?>">
+                    <a class="bouton bouton-secondaire"
+                       href="serie.php?id=<?= $serie["id"] ?>">
                         Voir la série
                     </a>
 
                 </div>
+
             </article>
 
         <?php endforeach; ?>
@@ -68,8 +62,7 @@ require "../includes/header.php";
 
 <?php else: ?>
 
-    <!-- Message affiché -->
-    <div class="empty">
+    <div class="vide">
         <p>Aucune série n'a encore été ajoutée.</p>
     </div>
 

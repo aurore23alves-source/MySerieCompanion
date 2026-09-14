@@ -1,7 +1,6 @@
-
 </main>
 
-<footer class="site-footer">
+<footer class="pied-page">
     <p>My Series Companion · Projet BTS SIO SLAM</p>
 </footer>
 

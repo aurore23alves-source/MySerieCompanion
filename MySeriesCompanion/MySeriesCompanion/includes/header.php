@@ -13,15 +13,15 @@ if (!isset($titrePage)) {
 </head>
 <body>
 
-<header class="site-header">
-    <div class="header-inner">
+<header class="entete-site">
+    <div class="interieur-entete">
         <a class="logo" href="index.php">My Series Companion</a>
 
         <nav>
             <a href="index.php">Mes séries</a>
-            <a class="btn btn-small" href="ajouter-serie.php">+ Ajouter une série</a>
+            <a class="bouton bouton-petit" href="ajouter-serie.php">+ Ajouter une série</a>
         </nav>
     </div>
 </header>
 
-<main class="container">
+<main class="conteneur">

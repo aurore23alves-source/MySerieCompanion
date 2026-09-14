@@ -1,100 +1,70 @@
 # My Series Companion
 
-Projet BTS SIO SLAM - niveau BTS 1.
+Projet réalisé en BTS SIO SLAM (2ème année)
 
 ## Fonctionnalités
 
-- afficher les séries ajoutées ;
-- ajouter une série avec le bouton **+ Ajouter une série** ;
-- enregistrer réellement la série dans MySQL ;
-- consulter le détail d'une série ;
-- ajouter une saison liée automatiquement à la série ;
-- consulter le détail d'une saison ;
-- ajouter un épisode lié automatiquement à la saison ;
-- afficher un message lorsqu'une saison ne possède aucun épisode.
+- Afficher les séries ajoutées
+- Ajouter une nouvelle série
+- Consulter le détail d'une série
+- Ajouter une saison à une série
+- Consulter le détail d'une saison
+- Ajouter un épisode à une saison
+- Afficher les épisodes d'une saison
+- Enregistrer les données dans une base MySQL
 
-Le design est volontairement simple : noir, blanc et gris.
+Le design du site est simple avec des couleurs noires, blanches et grises.
 
 ## Arborescence
 
-```text
 MySeriesCompanion/
-├── public/
-│   ├── index.php
-│   ├── ajouter-serie.php
-│   ├── serie.php
-│   ├── ajouter-saison.php
-│   ├── saison.php
-│   ├── ajouter-episode.php
-│   ├── assets/css/style.css
-│   └── uploads/
-├── config/database.php
-├── includes/
-│   ├── functions.php
-│   ├── header.php
-│   └── footer.php
-└── database/
-    ├── my_series_companion.sql
-    └── modelisation.md
-```
 
-## Installation avec XAMPP
+public/
+    - index.php
+    - ajouter-serie.php
+    - serie.php
+    - ajouter-saison.php
+    - saison.php
+    - ajouter-episode.php
 
-1. Démarrer **Apache** et **MySQL**.
-2. Copier `MySeriesCompanion` dans `C:\xampp\htdocs\`.
-3. Ouvrir phpMyAdmin.
-4. Importer `database/my_series_companion.sql`.
-5. Ouvrir :
+    assets/
+        css/
+            - style.css
 
-```text
-http://localhost/MySeriesCompanion/public/
-```
+config/
+    - database.php
 
-## Enregistrement dans MySQL
+includes/
+    - functions.php
+    - header.php
+    - footer.php
 
-Quand le formulaire `public/ajouter-serie.php` est envoyé, PHP récupère les données et exécute un `INSERT` dans la table `serie` :
+database/
+    - my_series_companion.sql
+    - modelisation.md
 
-```sql
+
+## Base de données
+
+Les données sont enregistrées dans MySQL avec PHP et PDO.
+
+Par exemple, pour ajouter une série :
+
 INSERT INTO serie (nom, resume, vignette, date_sortie)
 VALUES (:nom, :resume, :vignette, :date_sortie)
-```
 
-La requête est exécutée avec PDO. La série est donc réellement enregistrée dans MySQL.
+Les saisons sont reliées aux séries grâce à serie_id.
 
-Puis `lastInsertId()` récupère l'identifiant créé et le site redirige vers le détail de la nouvelle série.
+Les épisodes sont reliés aux saisons grâce à saison_id.
 
-Le même principe est utilisé pour les saisons et les épisodes.
 
-## Pourquoi `public/` ?
-
-`public/` contient les fichiers accessibles depuis le navigateur. Les fichiers de connexion à MySQL et les fonctions communes restent en dehors de ce dossier.
-
-## Modélisation
-
-```text
-SERIE
-   │ 1,N
-   ↓
-SAISON
-   │ 1,N
-   ↓
-EPISODE
-
-PERSONNE
-   │
-   ↓
-REGARDER
-   ↑
-   │
-EPISODE
-```
-
-## Test
+## Test du projet
 
 1. Aller sur la page d'accueil.
-2. Cliquer sur **+ Ajouter une série**.
-3. Remplir le formulaire et valider.
-4. Vérifier la redirection vers le détail.
-5. Vérifier dans phpMyAdmin que la nouvelle ligne est dans `serie`.
-6. Revenir à l'accueil : la série ajoutée doit maintenant apparaître.
-7. Ajouter une saison puis un épisode.
+2. Cliquer sur "+ Ajouter une série".
+3. Remplir le formulaire.
+4. Valider l'ajout.
+5. Vérifier que la série apparaît.
+6. Ajouter une saison à la série.
+7. Ajouter un épisode à la saison.
+8. Vérifier les données dans phpMyAdmin.
