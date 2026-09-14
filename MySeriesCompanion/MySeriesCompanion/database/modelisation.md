@@ -9,6 +9,19 @@ SAISON (1,N) -------- (1,1) EPISODE
 PERSONNE (1,N) -------- REGARDER -------- (1,N) EPISODE
 
 
+## Relations
+
+Une série peut avoir plusieurs saisons.
+
+Une saison appartient à une seule série.
+
+Une saison peut avoir plusieurs épisodes.
+
+Un épisode appartient à une seule saison.
+
+Une personne peut regarder plusieurs épisodes.
+
+
 ## Tables
 
 SERIE (
