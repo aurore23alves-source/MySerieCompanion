@@ -24,14 +24,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
     // Vignette
-    $vignette = "";
-    if (empty($erreurs) && isset($_FILES["vignette"])) {
-        $vignette = enregistrerImage($_FILES["vignette"]);
 
-        if ($_FILES["vignette"]["error"] !== UPLOAD_ERR_NO_FILE && $vignette === "") {
-            $erreurs[] = "La vignette doit être une image JPG, JPEG, PNG ou WEBP.";
-        }
-    }
+    $vignette = trim($_POST["vignette"] ?? ""); 
+
 
     // Si aucune erreur, on enregistre la série dans la base de données
     if (empty($erreurs)) {
@@ -73,11 +68,11 @@ require "../includes/header.php";
 <?php endif; ?>
 
 <!-- Formulaire d'ajout d'une série -->
- 
+
 <form class="form-card" method="POST" enctype="multipart/form-data">
 
     <div class="form-group">
-        <label for="nom">Nom <span class="required">*</span></label>
+        <label for="nom">Nom <span class="required"></span></label>
         <input type="text" id="nom" name="nom" required
         value="<?= e($_POST["nom"] ?? "") ?>">
     </div>
@@ -88,13 +83,14 @@ require "../includes/header.php";
     </div>
 
     <div class="form-group">
-        <label for="vignette">Vignette</label>
-        <input type="file" id="vignette" name="vignette"
-                accept=".jpg,.jpeg,.png,.webp">
-    </div>
+    <label for="vignette">URL de la vignette</label>
+    <input type="url" id="vignette" name="vignette"
+           placeholder="https://exemple.com/photo.jpg"
+           value="<?= e($_POST["vignette"] ?? "") ?>">
+</div>
 
     <div class="form-group">
-        <label for="date_sortie">Date de sortie <span class="required">*</span></label>
+        <label for="date_sortie">Date de sortie <span class="required"></span></label>
         <input type="date" id="date_sortie" name="date_sortie" required
                 value="<?= e($_POST["date_sortie"] ?? "") ?>">
     </div>
