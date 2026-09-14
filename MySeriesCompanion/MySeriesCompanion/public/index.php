@@ -10,13 +10,36 @@ $series = $requete->fetchAll(PDO::FETCH_ASSOC);
 require "../includes/header.php";
 ?>
 
-<section class="titre-page">
-    <h1>Mes séries</h1>
-    <p>Cette application te permet de gérer tes séries, leurs saisons et leurs épisodes.</p>
+<section class="banniere">
+
+    <div class="contenu-banniere">
+
+        <p class="petit-titre">MY SERIES COMPANION</p>
+
+        <h1>Toutes tes séries au même endroit.</h1>
+
+        <p>
+            Ajoute tes séries, leurs saisons et leurs épisodes,
+            puis retrouve-les facilement.
+        </p>
+
+        <a class="bouton" href="ajouter-serie.php">
+            + Ajouter une série
+        </a>
+
+    </div>
+
 </section>
 
-<div class="action-accueil">
-    <a class="bouton" href="ajouter-serie.php">+ Ajouter une série</a>
+<div class="titre-section">
+
+    <div>
+        <h2>Mes séries</h2>
+        <p class="date">
+            <?= count($series) ?> série(s) enregistrée(s)
+        </p>
+    </div>
+
 </div>
 
 <?php if (count($series) > 0): ?>
@@ -28,9 +51,13 @@ require "../includes/header.php";
             <article class="carte">
 
                 <?php if (!empty($serie["vignette"])): ?>
-                    <img class="image-carte"
-                         src="<?= e($serie["vignette"]) ?>"
-                         alt="<?= e($serie["nom"]) ?>">
+
+                    <img
+                        class="image-carte"
+                        src="<?= e($serie["vignette"]) ?>"
+                        alt="<?= e($serie["nom"]) ?>"
+                    >
+
                 <?php endif; ?>
 
                 <div class="contenu-carte">
@@ -38,17 +65,22 @@ require "../includes/header.php";
                     <h2><?= e($serie["nom"]) ?></h2>
 
                     <p class="date">
-                        Sortie : <?= date("d/m/Y", strtotime($serie["date_sortie"])) ?>
+                        Sortie :
+                        <?= date("d/m/Y", strtotime($serie["date_sortie"])) ?>
                     </p>
 
                     <?php if (!empty($serie["resume"])): ?>
+
                         <p class="resume">
                             <?= nl2br(e($serie["resume"])) ?>
                         </p>
+
                     <?php endif; ?>
 
-                    <a class="bouton bouton-secondaire"
-                       href="serie.php?id=<?= $serie["id"] ?>">
+                    <a
+                        class="bouton bouton-secondaire"
+                        href="serie.php?id=<?= $serie["id"] ?>"
+                    >
                         Voir la série
                     </a>
 
@@ -63,7 +95,13 @@ require "../includes/header.php";
 <?php else: ?>
 
     <div class="vide">
-        <p>Aucune série n'a encore été ajoutée.</p>
+        <p>
+            Aucune série n'a encore été ajoutée.
+        </p>
+
+        <a class="bouton" href="ajouter-serie.php">
+            Ajouter ma première série
+        </a>
     </div>
 
 <?php endif; ?>

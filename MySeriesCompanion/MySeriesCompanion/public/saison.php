@@ -109,25 +109,37 @@ require "../includes/header.php";
 
             <article class="episode">
 
-                <h3><?= e($episode["nom"]) ?></h3>
+                <?php if (!empty($episode["vignette"])): ?>
 
-                <?php if (!empty($episode["date_sortie"])): ?>
-                    <p class="date">
-                        Sortie : <?= e($episode["date_sortie"]) ?>
-                    </p>
+                    <img class="image-episode"
+                         src="<?= e($episode["vignette"]) ?>"
+                         alt="<?= e($episode["nom"]) ?>">
+
                 <?php endif; ?>
 
-                <?php if (!empty($episode["duree"])): ?>
-                    <p>
-                        Durée : <?= e($episode["duree"]) ?> minutes
-                    </p>
-                <?php endif; ?>
+                <div class="infos-episode">
 
-                <?php if (!empty($episode["resume"])): ?>
-                    <p class="resume">
-                        <?= e($episode["resume"]) ?>
-                    </p>
-                <?php endif; ?>
+                    <h3><?= e($episode["nom"]) ?></h3>
+
+                    <?php if (!empty($episode["date_sortie"])): ?>
+                        <p class="date">
+                            Sortie : <?= e($episode["date_sortie"]) ?>
+                        </p>
+                    <?php endif; ?>
+
+                    <?php if (!empty($episode["duree"])): ?>
+                        <p>
+                            Durée : <?= e($episode["duree"]) ?> minutes
+                        </p>
+                    <?php endif; ?>
+
+                    <?php if (!empty($episode["resume"])): ?>
+                        <p class="resume">
+                            <?= e($episode["resume"]) ?>
+                        </p>
+                    <?php endif; ?>
+
+                </div>
 
             </article>
 
